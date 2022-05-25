@@ -3,6 +3,7 @@ import ReactQuill from 'react-quill';
 import faker from 'faker/locale/en_US';
 
 import { 
+    EmptyLayout,
     Button,
     Container,
     Row,
@@ -15,6 +16,8 @@ import {
 } from '../../../components';
 import Fetcher from '../../../utilities/fetcher';
 import port from '../../../port';
+import {isAdmin} from '../../../utilities/admin';
+import Load from '../../../utilities/load';
 
 import { HeaderMain } from "../../components/HeaderMain";
 const text= `
@@ -56,7 +59,10 @@ export class CampaignPageEditor extends React.Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         this.fetchData();
     };
 
@@ -114,22 +120,13 @@ export class CampaignPageEditor extends React.Component {
                     <Card>
                         <Form>
                             <FormGroup>
-                                <Label for="defaultSelect" sm={3}>
-                                    Select Campaign
-                                </Label>
+                                <Label for="defaultSelect" sm={3}>Select Campaign</Label>
                                 <Col sm={9}>
-                                    
-                                        <Input
-                                            type="select"
-                                            onChange={this.handleChange}
-                                            name="select"
-                                            id="defaultSelect"
-                                        >
+                                        <Input type="select" onChange={this.handleChange} name="select" id="defaultSelect">
                                             <option defaultValue="">Select Campaign</option>
                                             {this.state.campaigns.map(camp => (
                                             <option value={camp.id}>{camp.name}</option>))}
                                         </Input>
-                                    
                                 </Col>
                             </FormGroup>
                         </Form>
@@ -150,7 +147,11 @@ export class CampaignPageEditor extends React.Component {
             );
         } else {
             return(
-                <p>Loading</p>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         }
         

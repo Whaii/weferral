@@ -1,5 +1,6 @@
 import React from 'react';
 import { 
+    EmptyLayout,
     Badge,
     Button,
     Container,
@@ -13,10 +14,12 @@ import {
     FormGroup,
     Form
 } from '../../../components';
+import Load from '../../../utilities/load';
 import Fetcher from '../../../utilities/fetcher.js';
 import port from '../../../port';
 import {WebhookModal,WebhookEdit} from './Modal';
 import DeleteModal from '../../components/DeleteModal';
+import {isAdmin} from '../../../utilities/admin';
 
 export class Webhook extends React.Component {
 
@@ -36,7 +39,10 @@ export class Webhook extends React.Component {
         this.fetchWebhooks = this.fetchWebhooks.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         this.fetchData();
         this.fetchWebhooks();
     }
@@ -89,7 +95,11 @@ export class Webhook extends React.Component {
         let subtitle = 'Integrate apps with Weferral';
         if(this.state.loading){
             return(
-                <div><p>loading</p></div>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         }else{
             let hooks = this.state.hooks;

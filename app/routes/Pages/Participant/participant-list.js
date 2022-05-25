@@ -5,7 +5,8 @@ import port from '../../../port';
 import DateFormat from '../../../utilities/dateformat';
 import { ToastContainer, toast } from 'react-toastify';
 import { 
-    Alert,
+    EmptyLayout,
+    UncontrolledAlert,
     Badge,
     UncontrolledButtonDropdown,
     DropdownToggle,
@@ -20,6 +21,8 @@ import {
 import WeferralTableBase from '../../components/Datatable';
 import {BootstrapTable, TableHeaderColumn} from 'react-bootstrap-table';
 import { ImportButton } from './ImportButton';
+import {isAdmin} from '../../../utilities/admin';
+import Load from '../../../utilities/load';
 
 //const history = useHistory();
 
@@ -46,9 +49,14 @@ export class ManageParticipantList extends React.Component {
         this.DeleteParticipant = this.DeleteParticipant.bind(this);
         this.showHandler = this.showHandler.bind(this);
         this.contentInfo = this.contentInfo.bind(this);
+        this.approve = this.approve.bind(this);
+        this.disapprove = this.disapprove.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         this.fetchData();
     }
 
@@ -105,7 +113,6 @@ export class ManageParticipantList extends React.Component {
         let self = this;
         let id = self.state.selectedId;
         let value = self.state.content;
-        alert(id);
         return(
             <Media>
                 <Media middle left className="mr-3">
@@ -113,7 +120,7 @@ export class ManageParticipantList extends React.Component {
                 </Media>
                 <Media body>
                     <Media heading tag="h6">
-                        Information!
+                        Alert!
                     </Media>
                     <p>
                         Are you sure you want to do this.
@@ -124,7 +131,7 @@ export class ManageParticipantList extends React.Component {
                         Suspend
                         </Button>}
                         {value === 'delete' &&
-                        <Button color="primary" onClick={() => { self.DeleteParticipant(id, value) }} >
+                        <Button color="danger" onClick={() => { self.DeleteParticipant(id, value) }} >
                         Delete
                         </Button>
                         }
@@ -140,7 +147,41 @@ export class ManageParticipantList extends React.Component {
     async showHandler(id, value){
         let self = this;
         await self.setState({selectedId: id, content: value});
-        toast.info(self.contentInfo());
+        toast.error(self.contentInfo());
+    }
+
+    approve(id){
+        let self = this;
+        Fetcher(`${port}/api/v1/participant/approve/${id}`).then(function (response) {
+            if(!response.error){
+                self.setState({success: true, response: response, alerts: {color:'info', message: 'Successfully approved'}});
+            }else{
+                let msg = 'Cannot approve participant.'
+                self.setState({
+                    alerts: {
+                        color: 'danger',
+                        message: `${response.error} : ${msg}`
+                    }
+                });
+            }
+        })
+    }
+
+    disapprove(id){
+        let self = this;
+        Fetcher(`${port}/api/v1/participant/disapprove/${id}`).then(function (response) {
+            if(!response.error){
+                self.setState({success: true, response: response, alerts: {color:'info', message: 'Successfully disapproved'}});
+            }else{
+                let msg = 'Cannot disapprove participant.'
+                self.setState({
+                    alerts: {
+                        color: 'danger',
+                        message: `${response.error} : ${msg}`
+                    }
+                });
+            }
+        })
     }
 
     /**
@@ -192,15 +233,23 @@ export class ManageParticipantList extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                     <DropdownItem tag={Link} to={`/edit-participant/${row.id}`}>
-                        <i className="fa fa-fw fa-envelope mr-2"></i>
+                        <i className="fa fa-fw fa-edit mr-2"></i>
                             Edit
                     </DropdownItem>
                     <DropdownItem onClick={() => { this.showHandler(row.id, 'suspend') }}>
-                        <i className="fa fa-fw fa-phone mr-2"></i>
+                        <i className="fa fa-fw fa-archive mr-2"></i>
                             Suspend
                     </DropdownItem>
+                    {row.status === 'active' ? <DropdownItem onClick={() => { this.disapprove(row.id) }}>
+                        <i className="fa fa-fw fa-minus-square mr-2"></i>
+                        Disapprove
+                    </DropdownItem>
+                    : <DropdownItem onClick={() => { this.approve(row.id) }}>
+                    <i className="fa fa-fw fa-check mr-2"></i>
+                        Approve
+                    </DropdownItem>}
                     <DropdownItem onClick={() => { this.showHandler(row.id, 'delete') }}>
-                        <i className="fa fa-fw fa-phone mr-2"></i>
+                        <i className="fa fa-fw fa-trash mr-2"></i>
                             Delete
                     </DropdownItem>
                     
@@ -212,15 +261,19 @@ export class ManageParticipantList extends React.Component {
     render() {
         if(this.state.loading){
             return(
-                <div><p>loading</p></div>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         }else {
             let alert = this.state.alerts;
             return(
                 <Container>
-                    {alert.message && <Alert color={alert.color}>
+                    {alert.message && <UncontrolledAlert color={alert.color}>
                         {alert.message}
-                    </Alert>}
+                    </UncontrolledAlert>}
                     <Row>
                     <Col xl={ 12 }>
                         <ImportButton />

@@ -5,16 +5,9 @@ import {
     Row,
     Card,
     CardBody,
-    CustomInput,
-    CardDeck,
+    EmptyLayout,
     Table,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
     CardTitle,
-    ListGroup,
-    ListGroupItem,
     Button,
     Col,
     Media
@@ -23,8 +16,10 @@ import Fetcher from '../../../utilities/fetcher.js';
 import port from '../../../port';
 import {
     TinyDonutChartBig
-} from "../../components/Financial/TinyDonutChartBig";
+} from "./components/TinyDonutChartBig";
 import { CampaignAnalytics } from './CampaignAnalytics';
+import {isAdmin, checkEnv} from '../../../utilities/admin';
+import Load from '../../../utilities/load';
 
 export class Dashboard extends React.Component {
 
@@ -38,13 +33,14 @@ export class Dashboard extends React.Component {
         this.fetchAnalytics = this.fetchAnalytics.bind(this);
     }
 
-    componentDidMount() {
-        this.fetchAnalytics();
-        /*if (!isAuthorized({permissions: ["can_administrate", "can_manage"]})) {
-            return browserHistory.push("/login");
-        } else {
+    async componentDidMount() {
+        if (await checkEnv() === false) {
+            return this.props.history.push("/setup");
+        }else if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }else{
             this.fetchAnalytics();
-        }*/
+        }
     }
 
     fetchAnalytics() {
@@ -60,7 +56,11 @@ export class Dashboard extends React.Component {
         let stats = this.state.analytics;
         if(this.state.loading){
             return(
-                <div><p>loading</p></div>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         } else{
             return(
@@ -176,7 +176,53 @@ export class Dashboard extends React.Component {
                             </Table>
                         </Col>
                     </Row>
-                    <CampaignAnalytics />
+                    <Row>
+                        <Col lg="12">
+                            <CampaignAnalytics />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg="6">
+                            <div className="hr-text hr-text-left my-2">
+                                <span>Social Media Shares</span>
+                            </div>
+                            <Table size="sm">
+                                <tbody>
+                                    <tr>
+                                        <td className="text-inverse bt-0">Facebook Shares</td>
+                                        <td className="text-right bt-0">
+                                            <Badge color="facebook" pill>{stats.mediaStats.fb_shares}</Badge>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-inverse">Twitter Shares</td>
+                                        <td className="text-right">
+                                            <Badge color="primary" pill>{stats.mediaStats.twitter_shares}</Badge>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-inverse">Email Shares</td>
+                                        <td className="text-right">
+                                            <Badge color="secondary" pill>{stats.mediaStats.email_shares}</Badge>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-inverse">Linkedin Shares</td>
+                                        <td className="text-right">
+                                            <Badge color="teal" pill>{stats.mediaStats.linkedin_shares}</Badge>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td className="text-inverse">Whatsapp Shares</td>
+                                        <td className="text-right">
+                                            <Badge color="green" pill>{stats.mediaStats.whatsapp_shares}</Badge>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </Col>
+                    </Row>
+                    
                 </Container>
             )
         }

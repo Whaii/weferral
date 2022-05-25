@@ -34,14 +34,14 @@ export const DefaultSidebar = () => (
 
         { /* START SIDEBAR: Only for Mobile */ }
         <Sidebar.MobileFluid>
-            <SidebarTopA />
+            {/*<SidebarTopA />*/}
             
-            <Sidebar.Section fluid cover>
+            {/*<Sidebar.Section fluid cover>*/}
                 { /* SIDEBAR: Menu */ }
                 <SidebarMiddleNav />
-            </Sidebar.Section>
+            {/*</Sidebar.Section>*/}
 
-            <SidebarBottomA />
+            {/*<SidebarBottomA />*/}
         </Sidebar.MobileFluid>
         { /* END SIDEBAR: Only for Mobile */ }
     </Sidebar>
