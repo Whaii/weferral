@@ -1,5 +1,6 @@
 import React from 'react';
 import { 
+    EmptyLayout,
     Container,
     Row,
     Col,
@@ -15,6 +16,7 @@ import {
 } from './../../../components';
 
 import { HeaderMain } from "../../components/HeaderMain";
+import {isAdmin} from '../../../utilities/admin';
 
 import {
     HeaderDemo
@@ -24,6 +26,7 @@ import {
     TrTableDefault
 } from "./components/TrTableDefault";
 import Fetcher from '../../../utilities/fetcher';
+import Load from '../../../utilities/load';
 import port from '../../../port';
 
 
@@ -40,8 +43,11 @@ export class Email extends React.Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
-    componentDidMount(){
+    async componentDidMount(){
         let self = this;
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         //alert('this');
         Fetcher(`${port}/api/v1/campaigns`).then((res) => {
             if(!res.err){
@@ -69,23 +75,9 @@ export class Email extends React.Component {
                 <React.Fragment>
                     <Container>
                         <HeaderMain
-                            title="Tables"
+                            title="Email Notifications"
                             className="mb-5 mt-4"
                         />
-                        { /* START Header 1 */}
-                        <Row>
-                            <Col lg={12}>
-                                <HeaderDemo
-                                    no={1}
-                                    title="Basic Tables"
-                                    subTitle={(
-                                        <React.Fragment>
-                                            All table styles are inherited in Bootstrap 4, meaning any nested tables will be styled in the same manner as the parent.
-                                        </React.Fragment>
-                                    )}
-                                />
-                            </Col>
-                        </Row>
                         <Row>
                             <Col lg={12}>
                                 <Card className="mb-3">
@@ -154,7 +146,11 @@ export class Email extends React.Component {
             )
         } else{
             return(
-                <p>Loading</p>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         }
         

@@ -6,6 +6,7 @@ import _ from 'lodash';
 import moment from 'moment';
 
 import {
+    EmptyLayout,
     Badge,
     Button,
     CustomInput,
@@ -20,7 +21,9 @@ import { Link } from 'react-router-dom';
 import DateFormat from '../../../utilities/dateformat';
 import Price from '../../../utilities/price';
 import Fetcher from '../../../utilities/fetcher';
+import Load from '../../../utilities/load';
 import port from '../../../port';
+import {isAdmin} from '../../../utilities/admin';
 
 const CampaignStatus = {
     Publish: true,
@@ -51,7 +54,10 @@ export class ManageRewardList extends React.Component {
         this.generateRow = this.generateRow.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         this.fetchData();
     };
 
@@ -76,7 +82,7 @@ export class ManageRewardList extends React.Component {
             return {
                 id: row.id,
                 campaign_name: row.references.campaigns[0].name,
-                status: row.dateScheduledFor,
+                status: {'due': row.dateScheduledFor, 'paid': row.assignedCredit},
                 participant_name: row.references.participants[0].name,
                 amount_due: row.assignedCredit,
                 amount_paid: row.redeemedCredit,
@@ -107,7 +113,7 @@ export class ManageRewardList extends React.Component {
     }
 
     handlePayoutRow() {
-        alert(this.state.selected);
+        //alert(this.state.selected);
         Fetcher(`${port}/api/v1/reward/payout/${this.state.selected}`).then(function(response){
             if(!response.error){
                 console.log(response);
@@ -154,7 +160,11 @@ export class ManageRewardList extends React.Component {
             formatter: (cell) => {
                 let pqProps;
                 let today = new Date().toISOString().slice(0, 10);
-                if (cell <= today) {
+                if (cell.paid == 0) {
+                    return(
+                        <Badge color="success">Paid</Badge>
+                    ) 
+                } else if (cell.due <= today) {
                     return(
                         <Badge color="warning">Due</Badge>
                     ) 
@@ -166,7 +176,7 @@ export class ManageRewardList extends React.Component {
             },
             sort: true,
             sortCaret
-        }, {
+        },{
             dataField: 'commission_type',
             text: 'Commission Type',
             sort: true,
@@ -255,7 +265,7 @@ export class ManageRewardList extends React.Component {
                                             <Button
                                                 size="sm"
                                                 outline
-                                                //onClick={this.handleDeleteRow.bind(this)}
+                                                onClick={this.handlePayoutRow.bind(this)}
                                             >
                                                 Mark as Paid
                                             </Button>
@@ -279,7 +289,11 @@ export class ManageRewardList extends React.Component {
             );
         } else{
             return(
-                <p>Loading</p>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         }
         

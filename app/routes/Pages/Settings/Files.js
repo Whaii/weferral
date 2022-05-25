@@ -1,19 +1,13 @@
 import React from 'react';
 import {
-    Col,
-    Row,
-    Button,
-    HolderProvider,
-    CardImg,
-    Input,
-    CustomInput,
-    UncontrolledModal,
-    ModalHeader,
-    ModalBody,
-    ModalFooter
+    EmptyLayout,
+    Input
 } from '../../../components';
 import Fetcher from '../../../utilities/fetcher.js';
 import port from '../../../port';
+import ImageUploader from '../../../utilities/image-uploader';
+import {isAdmin} from '../../../utilities/admin';
+import Load from '../../../utilities/load';
 
 class File extends React.Component {
 
@@ -23,17 +17,20 @@ class File extends React.Component {
             loading : true,
             campaigns : [],
             files: [],
-            file: {}
+            id: 0
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.fetchFiles = this.fetchFiles.bind(this);
-        this.handleFileUpload = this.handleFileUpload.bind(this);
+        //this.handleFileUpload = this.handleFileUpload.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         this.fetchData();
     };
 
@@ -60,37 +57,38 @@ class File extends React.Component {
         });
     }
 
-    handleFileUpload(e){
+    /*handleFileUpload(e){
         e.persist();
         
         let self = this;
         let file = e.target.files[0];
         let name = e.target.name;
         
-        self.setState({file: file, name: name});
+        self.setState({asset: file, name: name});
         console.log(file);
-    }
+    }*/
 
     handleChange(e){
         let self = this;
         let target = e.target;
         let value = target.value;
+        //let value = target.type === "file" ? e.target.files[0] : target.value;
         let name = target.name;
 
-        self.setState({[name]: value});
+        self.setState({id: value});
     }
 
     onSubmit(e){
         //e.preventDefault();
         let self = this;
 
-        const payload = {
+        /*const payload = {
             name: self.state.name,
-            image: self.state.file
+            image: self.state.image
         }
-        console.log(JSON.stringify(payload));
+        console.log(JSON.stringify(payload));*/
 
-        Fetcher(`${port}/api/v1/system-options/file/${self.state.campaign_id}`, 'POST', payload).then((res) => {
+        Fetcher(`${port}/api/v1/system-options/file/brand_logo/${self.state.id}`, 'POST').then((res) => {
             //this.props.history.push('/settings');
         }, (error) => {
             console.log(error);
@@ -100,7 +98,11 @@ class File extends React.Component {
     render(){
         if(this.state.loading){
             return(
-                <div><p>loading</p></div>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         }else{
             return(
@@ -114,7 +116,12 @@ class File extends React.Component {
                             <option value={camp.id}>{camp.name}</option>))}
                     </Input>
                     <br></br>
-                    <Row>
+                    {this.state.id > 0 && <ImageUploader name="file" elementID="brand-logo"
+                                           imageURL={`${port}/api/v1/system-options/file/brand_logo/${this.state.id}`}
+                                           imageStyle="badge badge-lg" uploadButton={true}
+                                           reloadNotice="Please reload the application."
+                    />}
+                    {/*<Row>
                         <Col>
                             <h6 className="mb-2">
                                 Brand Logo
@@ -134,7 +141,8 @@ class File extends React.Component {
                                     Upload Logo
                             </ModalHeader>
                                 <ModalBody>
-                                    <CustomInput type="file" name="brand_logo" id="uploadYourFile" onChange={this.handleFileUpload} label="Browse for a file to upload...." />
+                                    <Input type="text" name="name" value="brand_logo" onChange={this.handleChange} hidden />
+                                    <CustomInput type="file" name="image" id="uploadYourFile" onChange={this.handleChange} label="Browse for a file to upload...." />
                                 </ModalBody>
                                 <Button color="primary" size="md" onClick={() => { this.onSubmit() }}>Upload</Button>
                                 <ModalFooter>
@@ -144,7 +152,7 @@ class File extends React.Component {
                                 </ModalFooter>
                             </UncontrolledModal>
                         </Col>
-                    </Row>
+                    </Row>*/}
                 </React.Fragment>
                 
             )

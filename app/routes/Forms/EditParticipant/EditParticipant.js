@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { 
-    Alert,
+    EmptyLayout,
+    UncontrolledAlert,
     Button,
     Container,
     Row,
@@ -20,6 +21,8 @@ import { HeaderMain } from "../../components/HeaderMain";
 import Fetcher from '../../../utilities/fetcher';
 import port from '../../../port';
 import update from 'immutability-helper';
+import {isAdmin} from '../../../utilities/admin';
+import Load from '../../../utilities/load';
 let _ = require("lodash");
 
 export class EditParticipant extends React.Component {
@@ -41,7 +44,10 @@ export class EditParticipant extends React.Component {
         this.handleUpdateparticipant = this.handleUpdateparticipant.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         this.fetchData();
     };
 
@@ -98,16 +104,20 @@ export class EditParticipant extends React.Component {
     render() {
         if(this.state.loading){
             return (
-                <div><p>loading</p></div>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         } else{
             let participant =this.state.participant;
             return (
                 <React.Fragment>
                     {(this.state.alerts && this.state.alerts.message) &&
-                        <Alert color={this.state.alerts.color} >
+                        <UncontrolledAlert color={this.state.alerts.color} >
                             {this.state.alerts.message}
-                        </Alert>
+                        </UncontrolledAlert>
                     }
                 <Container>
                     <HeaderMain

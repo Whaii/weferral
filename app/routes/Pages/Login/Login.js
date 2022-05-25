@@ -10,6 +10,7 @@ import update from "immutability-helper";
 import {connect} from "react-redux";
 
 import {
+    UncontrolledAlert,
     Form,
     FormGroup,
     FormText,
@@ -22,14 +23,14 @@ import {
 } from './../../../components';
 
 import { HeaderAuth } from "../../components/Pages/HeaderAuth";
-import { FooterAuth } from "../../components/Pages/FooterAuth";
 
 class Login extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            form : {}
+            form : {},
+            alerts: {}
         };
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
@@ -57,6 +58,12 @@ class Login extends React.Component {
                 //localStorage.setItem("permissions", result.permissions);
             }else{
                 console.log("Login error", result.error);
+                that.setState({
+                    alerts: {
+                        color: 'danger',
+                        message: result.error
+                    }
+                });
                 that.setState({errors: result.error});
             }
         })
@@ -74,8 +81,8 @@ class Login extends React.Component {
         document.body.classList.remove('login')
     }*/
 
-    componentDidMount(){
-        if(!isAdmin()){
+    async componentDidMount(){
+        if(await isAdmin() === false){
             return this.props.history.push("/login");
             //return browserHistory.push("/");
         }
@@ -94,6 +101,11 @@ class Login extends React.Component {
         return (
             <EmptyLayout>
                 <EmptyLayout.Section center>
+                {(this.state.alerts && this.state.alerts.message) &&
+                        <UncontrolledAlert color={this.state.alerts.color} >
+                            {this.state.alerts.message}
+                        </UncontrolledAlert>
+                    }
                     { /* START Header */}
                     <HeaderAuth
                         title="Sign In to Application"
@@ -104,7 +116,7 @@ class Login extends React.Component {
                         <FormGroup>
                             <Label for="emailAdress">
                                 Email Adress
-                    </Label>
+                            </Label>
                             <Input onChange={this.handleInputChange} type="email" name="email" id="email" placeholder="Enter email..." className="bg-white" />
                             <FormText color="muted">
                                 We&amp;ll never share your email with anyone else.
@@ -115,9 +127,6 @@ class Login extends React.Component {
                                 Password
                     </Label>
                             <Input onChange={this.handleInputChange} type="password" name="password" id="password" placeholder="Password..." className="bg-white" />
-                        </FormGroup>
-                        <FormGroup>
-                            <CustomInput type="checkbox" id="rememberPassword" label="Remember Password" inline />
                         </FormGroup>
                         <ThemeConsumer>
                             {
@@ -135,14 +144,8 @@ class Login extends React.Component {
                         <Link to="/pages/forgotpassword" className="text-decoration-none">
                             Forgot Password
                         </Link>
-                        <Link to="/pages/register" className="ml-auto text-decoration-none">
-                            Register
-                        </Link>
                     </div>
                     { /* END Bottom Links */}
-                    { /* START Footer */}
-                    <FooterAuth />
-                    { /* END Footer */}
                 </EmptyLayout.Section>
             </EmptyLayout>
         )

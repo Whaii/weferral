@@ -14,6 +14,7 @@ import {
     FormGroup, 
     Label, 
     Input, 
+    EmptyLayout,
     FormText
 } from './../../../components';
 import { HeaderMain } from "../../components/HeaderMain";
@@ -23,6 +24,8 @@ import port from '../../../port';
 import { NavLink as Link } from 'react-router-dom';
 import EmailEditor from './EmailEditor';
 import ReactQuill, {Quill} from 'react-quill';
+import {isAdmin} from '../../../utilities/admin';
+import Load from '../../../utilities/load';
 
 const modules = {
     toolbar: [
@@ -72,9 +75,12 @@ export class NotificationTemplateForm extends React.Component {
         this.attachQuillRefs = this.attachQuillRefs.bind(this);
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         let self = this;
         //alert(JSON.stringify(self.props));
+        if (await isAdmin() === false) {
+            return this.props.history.push("/login");
+        }
         Fetcher(self.state.url).then(function(response){
             if(!response.error){
                 console.log(response);
@@ -174,14 +180,6 @@ export class NotificationTemplateForm extends React.Component {
                                             inline
                                             checked={template.data.send_email}
                                         />
-                                        <CustomInput
-                                            type="checkbox"
-                                            onChange={this.handleChange}
-                                            name="send_admin"
-                                            label="Send To Admin"
-                                            inline
-                                            checked={template.data.send_to_owner}
-                                        />
                                     </FormGroup>
                                     { /* START Input */}
                                     <FormGroup row>
@@ -274,7 +272,11 @@ export class NotificationTemplateForm extends React.Component {
             )
         } else {
             return(
-                <p>Loading</p>
+                <EmptyLayout>
+                    <EmptyLayout.Section center>
+                        <Load/>
+                    </EmptyLayout.Section>
+                </EmptyLayout>
             )
         }
         
