@@ -6,23 +6,11 @@ import {
     NavItem,
     NavLink
 } from './../../components';
-import port from '../../port';
-import Fetcher from '../../utilities/fetcher';
-
-const logOut = function(){
-    localStorage.removeItem("jwtToken");
-    Fetcher(`${port}/api/v1/auth/session/clear`).then(function (response) {
-        return;
-    });
-}
 
 const NavbarUser = (props) => (
     <NavItem { ...props }>
-        <NavLink 
-            tag={ Link } 
-            to="/logout"
-            >
-            <i className="fa fa-power-off"></i>
+        <NavLink tag={ Link } to="/user/profile">
+            <i className="fa fa-user"></i>
         </NavLink>
     </NavItem>
 );

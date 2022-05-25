@@ -10,10 +10,14 @@ let Fetcher = function(path, method="GET", body, init=null){
             let token = localStorage.getItem("jwtToken");
             headers.append("Authorization", `JWT ${token}`);
         }
+        if( localStorage.getItem("bearerToken")) {
+            let token = localStorage.getItem("bearerToken");
+            headers.append("Authorization", `Bearer ${token}`);
+        }
 
         init = { method: method,
             headers: headers,
-            credentials: 'include',
+            credentials: "include"
         };
 
         if(method == "POST" || method=="PUT"){
