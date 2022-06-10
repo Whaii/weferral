@@ -102,7 +102,7 @@
     "react-s-alert": "^1.4.1",
     "react-share": "^4.3.1",
     "react-text-mask": "^5.4.3",
-    "react-toastify": "^5.2.1",
+    "react-toastify": "^9.0.4",
     "react-toggle": "^4.0.2",
     "react-universal-component": "^4.0.0",
     "reactstrap": "^8.0.0",
