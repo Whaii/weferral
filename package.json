@@ -77,7 +77,7 @@
     "react-beautiful-dnd": "^11.0.4",
     "react-big-calendar": "^0.22.0",
     "react-bootstrap-table": "^4.3.1",
-    "react-bootstrap-table-next": "^3.1.4",
+    "react-bootstrap-table-next": "^4.0.3",
     "react-bootstrap-table2-editor": "^1.2.4",
     "react-bootstrap-table2-filter": "^1.1.9",
     "react-bootstrap-table2-paginator": "^2.0.6",
