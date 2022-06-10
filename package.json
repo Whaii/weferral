@@ -75,7 +75,7 @@
     "rc-slider": "^9.7.2",
     "react": "^18.1.0",
     "react-beautiful-dnd": "^11.0.4",
-    "react-big-calendar": "^0.22.0",
+    "react-big-calendar": "^0.40.1",
     "react-bootstrap-table": "^4.3.1",
     "react-bootstrap-table-next": "^4.0.3",
     "react-bootstrap-table2-editor": "^1.2.4",
