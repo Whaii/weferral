@@ -58,7 +58,7 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "csv": "^5.3.2",
+    "csv": "^6.1.0",
     "faker": "^4.1.0",
     "font-awesome": "^4.7.0",
     "holderjs": "^2.9.6",
