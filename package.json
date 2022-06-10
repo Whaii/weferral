@@ -59,7 +59,7 @@
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
     "csv": "^6.1.0",
-    "faker": "^4.1.0",
+    "faker": "^6.6.6",
     "font-awesome": "^4.7.0",
     "holderjs": "^2.9.6",
     "immutability-helper": "^3.1.1",
