@@ -4,7 +4,6 @@ import {
     Input,
     InputGroup,
     Button,
-    InputGroupAddon
 } from '../../../../app/components';
 
 export class CustomSearch extends React.Component {
@@ -30,9 +29,7 @@ export class CustomSearch extends React.Component {
     render() {
         return (
             <InputGroup className={ this.props.className } size="sm">
-                <InputGroupAddon addonType="prepend">
-                    <i className="fa fa-search fa-fw"></i>
-                </InputGroupAddon>
+                <i className="fa fa-search fa-fw"></i>
                 <Input
                     onChange={(e) => { this.setState({ value: e.target.value }) }}
                     value={ this.state.value }
@@ -41,14 +38,14 @@ export class CustomSearch extends React.Component {
                 />
                 {
                     this.state.value && (
-                        <InputGroupAddon addonType="append">
+                        
                             <Button
                                 outline
                                 onClick={() => { this.setState({value: ''}) }}
                             >
                                 <i className="fa fa-fw fa-times"></i>
                             </Button>
-                        </InputGroupAddon>
+                        
                     )
                 }
             </InputGroup>

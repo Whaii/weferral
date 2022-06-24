@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import { customFilter } from 'react-bootstrap-table2-filter';
-import uid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
-import { CustomInput } from './../../../../components';
+import { Input } from './../../../../components';
 
 class SelectFilter extends React.Component {
     static propTypes = {
@@ -51,7 +51,7 @@ class SelectFilter extends React.Component {
     render() {
         const { placeholder, options } = this.props;
         return (
-            <CustomInput
+            <Input
                 type="select"
                 bsSize="sm"
                 onChange={(e) => { this.setState({ value: e.target.value }) }}
@@ -67,7 +67,7 @@ class SelectFilter extends React.Component {
                         <option value={value} key={ index }>{ label }</option>
                     ))
                 }
-            </CustomInput>
+            </Input>
         )
     }
 }

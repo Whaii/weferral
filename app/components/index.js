@@ -3,14 +3,12 @@ import Avatar, { AvatarAddOn } from './Avatar';
 import Card from './Card';
 import CardHeader from './CardHeader';
 import Checkable from './Checkable';
-import CustomInput from './CustomInput';
 import Divider from './Divider';
 import EmptyLayout from './EmptyLayout';
 import ExtendedDropdown from './ExtendedDropdown';
 import FloatGrid from './FloatGrid';
 import HolderProvider from './HolderProvider';
 import IconWithBadge from './IconWithBadge';
-import InputGroupAddon from './InputGroupAddon';
 import Layout, {
     withPageConfig,
     setupPage,
@@ -79,9 +77,7 @@ export {
     FormText,
     Input,
     InputGroup,
-    InputGroupButtonDropdown,
     InputGroupText,
-    Jumbotron,
     Label,
     ListGroup,
     ListGroupItem,
@@ -113,6 +109,7 @@ export {
     UncontrolledCollapse,
     UncontrolledTooltip
 } from 'reactstrap';
+
 export {
     Accordion,
     //App,
@@ -121,13 +118,11 @@ export {
     Card,
     CardHeader,
     Checkable,
-    CustomInput,
     Divider,
     EmptyLayout,
     ExtendedDropdown,
     FloatGrid,
     IconWithBadge,
-    InputGroupAddon,
     HolderProvider,
     Layout,
     Nav,

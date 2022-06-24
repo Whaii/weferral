@@ -1,4 +1,4 @@
-import csv from 'csv';
+import * as csv from 'csv';
 import Fetcher from './fetcher.js';
 import port from '../port';
 

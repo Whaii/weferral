@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import uid from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import qs from 'query-string';
 
 import colors from './../../colors';
@@ -89,4 +89,3 @@ class HolderTextProvider extends React.Component {
 }
 
 export { HolderTextProvider };
-

@@ -10,7 +10,7 @@ import {
     ListGroupItem,
     Row,
     Col,
-    CustomInput,
+    Input,
     Button,
     Label
 } from './../../../components';

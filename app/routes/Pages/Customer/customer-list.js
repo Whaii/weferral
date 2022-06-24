@@ -8,7 +8,7 @@ import {
     EmptyLayout,
     Badge,
     Button,
-    CustomInput,
+    Input,
     UncontrolledModal,
     ModalHeader,
     ModalBody,
@@ -157,7 +157,7 @@ export class ManageCustomerList extends React.Component {
                                 Import Customer
                             </ModalHeader>
                             <ModalBody>
-                                <CustomInput type="file" accept=".csv,.xlsx,.xls" id="uploadYourFile" onChange={this.handleFileUpload} name="customFile" label="Browse for a file to upload...." />
+                                <Input type="file" accept=".csv,.xlsx,.xls" id="uploadYourFile" onChange={this.handleFileUpload} name="customFile" label="Browse for a file to upload...." />
                             </ModalBody>
                             <ModalFooter>
                                 <UncontrolledModal.Close color="link" className="text-primary" size="lg">

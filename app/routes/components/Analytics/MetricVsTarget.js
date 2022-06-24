@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 
 import { 
     Progress,
-    InputGroupAddon,
     InputGroupText,
     Input,
     InputGroup
@@ -20,9 +19,7 @@ const MetricVsTarget = (props) => (
             Target: { props.targetValue }
         </div>
         <InputGroup className="mb-1">
-            <InputGroupAddon addonType="prepend">
-                <InputGroupText>Daily Target:</InputGroupText>
-            </InputGroupAddon>
+            <InputGroupText>Daily Target:</InputGroupText>
             <Input placeholder="Enter..." />
         </InputGroup>
     </React.Fragment>

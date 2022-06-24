@@ -12,7 +12,6 @@ import {
     CardText,
     InputGroup,
     Input,
-    InputGroupAddon
 } from './../../../components';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Fetcher from '../../../utilities/fetcher.js';
@@ -80,11 +79,11 @@ const ShareCard = (props) => (
                                 <br></br>
                             <InputGroup>
                                 <Input value={`${props.rows.url}?ref=${props.rows.referral_code}`} disabled/>
-                                <InputGroupAddon addonType="append">
+                                
                                 <CopyToClipboard text={`${props.rows.url}?ref=${props.rows.referral_code}`} >
                                     <Button color="primary">Copy</Button>
                                 </CopyToClipboard>
-                                </InputGroupAddon>
+                                
                             </InputGroup>
                         </CardBody>
                     </Card>

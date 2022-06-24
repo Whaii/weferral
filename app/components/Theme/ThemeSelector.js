@@ -7,7 +7,7 @@ import {
     CardBody,
     Button,
     FormGroup,
-    CustomInput
+    Input
 } from 'reactstrap';
 
 import './../../styles/components/theme-selector.scss';
@@ -85,7 +85,7 @@ class ThemeSelector extends React.Component {
                             </span>
                             {
                                 _.map(this.props.colorOptions, (option, index) => (
-                                        <CustomInput
+                                        <Input
                                             key={ index }
                                             type="radio"
                                             name="sidebarColor"
@@ -115,7 +115,7 @@ class ThemeSelector extends React.Component {
                             </span>
                             {
                                 _.map(this.props.styleOptions, (option, index) => (
-                                    <CustomInput
+                                    <Input
                                         key={ index }
                                         type="radio"
                                         name="sidebarStyle"

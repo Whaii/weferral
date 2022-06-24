@@ -142,7 +142,7 @@ class File extends React.Component {
                             </ModalHeader>
                                 <ModalBody>
                                     <Input type="text" name="name" value="brand_logo" onChange={this.handleChange} hidden />
-                                    <CustomInput type="file" name="image" id="uploadYourFile" onChange={this.handleChange} label="Browse for a file to upload...." />
+                                    <Input type="file" name="image" id="uploadYourFile" onChange={this.handleChange} label="Browse for a file to upload...." />
                                 </ModalBody>
                                 <Button color="primary" size="md" onClick={() => { this.onSubmit() }}>Upload</Button>
                                 <ModalFooter>

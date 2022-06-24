@@ -9,11 +9,10 @@ import {
     CardBody,
     FormFeedback,
     Badge,
-    CustomInput,
+    Input,
     Form, 
     FormGroup, 
     Label, 
-    Input, 
     EmptyLayout,
     FormText
 } from './../../../components';
@@ -172,7 +171,7 @@ export class NotificationTemplateForm extends React.Component {
                                 { /* START Form */}
                                 <Form>
                                     <FormGroup>
-                                        <CustomInput
+                                        <Input
                                             type="checkbox"
                                             onChange={this.handleChange}
                                             name="send_email"

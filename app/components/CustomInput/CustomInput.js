@@ -1,17 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
-import { CustomInput as RSCustomInput } from 'reactstrap';
+import { Input } from 'reactstrap';
 
-const CustomInput = (props) => {
+const Input = (props) => {
     const { className, ...otherProps } = props;
     const inputClass = classNames(className, {
         'custom-control-empty': !props.label
     });
 
     return (
-        <RSCustomInput className={ inputClass } { ...otherProps } />
+        <Input className={ inputClass } { ...otherProps } />
     );
 }
-CustomInput.propTypes = { ...RSCustomInput.propTypes };
+Input.propTypes = { ...Input.propTypes };
 
-export { CustomInput };
+export { Input };

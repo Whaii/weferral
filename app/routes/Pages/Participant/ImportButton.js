@@ -5,7 +5,6 @@ import {
     Button,
     ButtonToolbar,
     Input,
-    CustomInput,
     Form,
     FormGroup,
     Label,
@@ -131,7 +130,7 @@ export class ImportButton extends React.Component {
                                             </Input>
                                         </FormGroup>
                                         <FormGroup>
-                                        <CustomInput type="file" accept=".csv,.xlsx,.xls" id="uploadYourFile" onChange={this.handleFileUpload} name="customFile" label="Browse for a file to upload...." />
+                                        <Input type="file" accept=".csv,.xlsx,.xls" id="uploadYourFile" onChange={this.handleFileUpload} name="customFile" label="Browse for a file to upload...." />
                                         </FormGroup>
                                 </Form>
                                 <Button color="primary" size="lg" onClick={ () => this.fileSubmit() }>Upload</Button>

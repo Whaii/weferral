@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
-import uid from 'uuid/v4';
+import { v4 as uuuid } from 'uuid';
 import { customFilter, Comparator, FILTER_TYPES } from 'react-bootstrap-table2-filter';
 
-import { CustomInput, Input } from './../../../../components';
+import { Input } from './../../../../components';
 
 const comparatorSign = (comp) => {
     switch (comp) {
@@ -41,8 +41,8 @@ class NumberFilter extends React.Component {
             comparator: props.comparator
         }
 
-        this.comparatorInputId = uid();
-        this.valueInputId = uid();
+        this.comparatorInputId = uuid();
+        this.valueInputId = uuid();
     }
 
     componentDidMount() {
@@ -83,7 +83,7 @@ class NumberFilter extends React.Component {
             <div className='d-flex'>
             {
                 (!_.isEmpty(comparators) && comparators.length > 0) && (
-                    <CustomInput
+                    <Input
                         type="select"
                         bsSize="sm"
                         onChange={(e) => { this.setState({ comparator: e.target.value }) }}
@@ -104,7 +104,7 @@ class NumberFilter extends React.Component {
                                 </option>
                             ))
                         }
-                    </CustomInput>
+                    </Input>
                 )
             }
                 <Input

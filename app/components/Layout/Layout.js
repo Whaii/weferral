@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Helmet } from 'react-helmet';
-import { withRouter } from 'react-router-dom';
+import {
+    useLocation,
+    useNavigate,
+    useParams
+  } from "react-router-dom";
+  
 import _ from 'lodash';
 
 import { LayoutContent } from './LayoutContent';
@@ -269,6 +274,22 @@ class Layout extends React.Component {
         );
     }
 }
+
+export const withRouter =(Component) =>{
+    function ComponentWithRouterProp(props) {
+      let location = useLocation();
+      let navigate = useNavigate();
+      let params = useParams();
+      return (
+        <Component
+          {...props}
+          router={{ location, navigate, params }}
+        />
+      );
+    }
+  
+    return ComponentWithRouterProp;
+  }
 
 const routedLayout = withRouter(Layout);
 

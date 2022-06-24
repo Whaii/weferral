@@ -18,7 +18,6 @@ import Fetcher from '../../../utilities/fetcher';
 import port from '../../../port';
 
 import { HeaderMain } from "../../components/HeaderMain";
-import { CustomInput } from 'reactstrap';
 import {isAdmin} from '../../../utilities/admin';
 import Load from '../../../utilities/load';
 
@@ -122,7 +121,7 @@ export class CampaignSettings extends React.Component {
                                             return (
                                                 <Form>
                                                     <FormGroup>
-                                                        <CustomInput
+                                                        <Input
                                                             type="checkbox"
                                                             onChange={this.handleChange}
                                                             id={group.id}

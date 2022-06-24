@@ -8,7 +8,6 @@ import {
     FormGroup,
     FormText,
     Input,
-    CustomInput,
     Button,
     Label,
     EmptyLayout,

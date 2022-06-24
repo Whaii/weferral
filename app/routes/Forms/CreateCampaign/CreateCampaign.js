@@ -14,7 +14,6 @@ import {
     Form,
     FormGroup,
     Input,
-    CustomInput,
     Label,
 } from './../../../components';
 
@@ -235,7 +234,7 @@ export class CreateCampaign extends React.Component {
                                                                     <Label for="reward-type">
                                                                         Reward Type
                                                                 </Label>
-                                                                    <CustomInput
+                                                                    <Input
                                                                         onChange={this.handleChange}
                                                                         type="select"
                                                                         name="reward_type"
@@ -246,19 +245,19 @@ export class CreateCampaign extends React.Component {
                                                                         <option value="discount">Discount</option>
                                                                         <option value="discount_coupon">Discount Coupon</option>
                                                                         <option value="points">Points</option>
-                                                                    </CustomInput>
+                                                                    </Input>
                                                                 </FormGroup>
                                                                 {this.state.rewardType === 'cash_reward' && <FormGroup>
                                                                     <Label for="commission-type">
                                                                         Commission Type
                                                                     </Label>
-                                                                    <CustomInput  type="select" onChange={this.handleChange} name="commission_type"
+                                                                    <Input  type="select" onChange={this.handleChange} name="commission_type"
                                                                         id="commission-type"
                                                                     >
                                                                         <option value="">Select Commission Type</option>
                                                                         <option value="fixed">Fixed</option>
                                                                         <option value="percentage_sale">Percentage Sale</option>
-                                                                    </CustomInput>
+                                                                    </Input>
                                                                 </FormGroup>}
                                                                 {this.state.comType === 'percentage_sale' && <FormGroup>
                                                                     <Label for="percent">
@@ -304,7 +303,7 @@ export class CreateCampaign extends React.Component {
                                                         </CardTitle>
                                                             <Form>
                                                                 <FormGroup>
-                                                                    <CustomInput
+                                                                    <Input
                                                                         type="checkbox"
                                                                         onChange={this.handleChange}
                                                                         id="private_campaign"
@@ -313,7 +312,7 @@ export class CreateCampaign extends React.Component {
                                                                         className="mb-3"
                                                                         
                                                                     />
-                                                                    <CustomInput
+                                                                    <Input
                                                                         type="checkbox"
                                                                         onChange={this.handleChange}
                                                                         id="auto_approval"
@@ -321,7 +320,7 @@ export class CreateCampaign extends React.Component {
                                                                         label="Auto Approve referrals who sign up for this campaign"
                                                                         className="mb-3"
                                                                     />
-                                                                    <CustomInput
+                                                                    <Input
                                                                         type="checkbox"
                                                                         onChange={this.handleChange}
                                                                         id="enable_recurring"
@@ -379,7 +378,7 @@ export class CreateCampaign extends React.Component {
                                                                     <Label for="payout_term">
                                                                         Payout Term(Days)
                                                                 </Label>
-                                                                    <CustomInput
+                                                                    <Input
                                                                         type="select"
                                                                         onChange={this.handleChange}
                                                                         name="payout_term"
@@ -389,7 +388,7 @@ export class CreateCampaign extends React.Component {
                                                                         <option value="NET15">Pay on 15th of the month the previous month earning</option>
                                                                         <option value="NET20">Pay on 20th of the month the previous month earning</option>
                                                                         <option value="NET30">Pay on 30th of the month the previous month earning</option>
-                                                                    </CustomInput>
+                                                                    </Input>
                                                                 </FormGroup>
                                                             </Form>
                                                         </CardBody>

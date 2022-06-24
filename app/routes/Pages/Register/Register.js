@@ -6,7 +6,6 @@ import {
     FormGroup,
     FormText,
     Input,
-    CustomInput,
     Button,
     Label,
     EmptyLayout,
@@ -53,7 +52,7 @@ const Register = () => (
                     </FormText>
                 </FormGroup>
                 <FormGroup>
-                    <CustomInput type="checkbox" id="acceptTerms" label="Accept Terms and Privacy Policy" inline />
+                    <Input type="checkbox" id="acceptTerms" label="Accept Terms and Privacy Policy" inline />
                 </FormGroup>
                 <ThemeConsumer>
                 {

@@ -1,5 +1,5 @@
 import React from 'react';
-import faker from 'faker/locale/en_US';
+import { faker } from '@faker-js/faker';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
 
@@ -15,7 +15,6 @@ import {
     Media,
     InputGroup,
     Input,
-    InputGroupAddon,
     Button
 } from './../../components';
 
@@ -44,11 +43,9 @@ const NavbarMessages = (props) => (
             <ExtendedDropdown.Section>
                 <InputGroup>
                     <Input placeholder="Search Messages..." />
-                    <InputGroupAddon addonType="append">
                         <Button color="secondary" outline>
                             <i className="fa fa-search" />
                         </Button>
-                    </InputGroupAddon>
                 </InputGroup>
             </ExtendedDropdown.Section>
 

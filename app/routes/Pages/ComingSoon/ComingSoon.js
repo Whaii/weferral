@@ -6,7 +6,6 @@ import {
     FormGroup,
     FormText,
     Input,
-    InputGroupAddon,
     InputGroup,
     Button,
     Label,
@@ -53,7 +52,7 @@ const ComingSoon = () => (
                     </Label>
                     <InputGroup>
                         <Input type="email" name="email" id="email" placeholder="Enter here..." />
-                        <InputGroupAddon addonType="append">
+                        
                             <ThemeConsumer>
                             {
                                 ({ color }) => (
@@ -63,7 +62,7 @@ const ComingSoon = () => (
                                 )
                             }
                             </ThemeConsumer>
-                        </InputGroupAddon>
+                        
                     </InputGroup>
                     <FormText className="muted">
                         If you want to be informed about the start, please subscribe to the newsletter

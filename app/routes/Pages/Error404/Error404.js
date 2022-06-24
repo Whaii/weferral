@@ -5,7 +5,6 @@ import {
     Form,
     FormGroup,
     Input,
-    InputGroupAddon,
     InputGroup,
     Button,
     Label,
@@ -31,7 +30,7 @@ const Error404 = () => (
                     </Label>
                     <InputGroup>
                         <Input type="text" name="text" id="search" placeholder="Enter search phrase here..." className="bg-white" />
-                        <InputGroupAddon addonType="append">
+                        
                             <ThemeConsumer>
                             {
                                 ({ color }) => (
@@ -41,7 +40,7 @@ const Error404 = () => (
                                 )
                             }
                             </ThemeConsumer>
-                        </InputGroupAddon>
+                        
                     </InputGroup>
                 </FormGroup>
             </Form>

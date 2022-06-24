@@ -5,7 +5,6 @@ import {
     Container,
     Row,
     Col,
-    CustomInput,
     Input,
     Card,
     Label,
@@ -84,12 +83,12 @@ class WebhookModal extends React.Component {
                                 
                             </FormGroup>
                             <FormGroup>
-                                <CustomInput onChange={this.handleChange} type="select"
+                                <Input onChange={this.handleChange} type="select"
                                     name="async_lifecycle"
                                     id="asynchronous">
                                     <option value="true">Asynchronous</option>
                                     <option value="false">Synchronous</option>
-                                </CustomInput>
+                                </Input>
                             </FormGroup>
                         </Form>
                         <Button color="primary" size="md" onClick={() => { this.submitHook() }}>Submit</Button>
@@ -151,12 +150,12 @@ class WebhookEdit extends React.Component {
                                 
                             </FormGroup>
                             <FormGroup>
-                                <CustomInput onChange={this.handleChange} type="select"
+                                <Input onChange={this.handleChange} type="select"
                                     name="async_lifecycle"
                                     id="asynchronous">
                                     <option value="true">Asynchronous</option>
                                     <option value="false">Synchronous</option>
-                                </CustomInput>
+                                </Input>
                             </FormGroup>
                         </Form>
                         <Button color="primary" size="md" onClick={() => { this.submitHook() }}>Submit</Button>

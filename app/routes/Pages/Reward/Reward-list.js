@@ -9,7 +9,7 @@ import {
     EmptyLayout,
     Badge,
     Button,
-    CustomInput,
+    Input,
     ButtonGroup
 } from '../../../../app/components';
 import { CustomExportCSV } from '../../Tables/components/CustomExportButton';
@@ -229,10 +229,10 @@ export class ManageRewardList extends React.Component {
                 onSelect: this.handleSelect.bind(this),
                 onSelectAll: this.handleSelectAll.bind(this),
                 selectionRenderer: ({ mode, checked, disabled }) => (
-                    <CustomInput type={mode} checked={checked} disabled={disabled} />
+                    <Input type={mode} checked={checked} disabled={disabled} />
                 ),
                 selectionHeaderRenderer: ({ mode, checked, indeterminate }) => (
-                    <CustomInput type={mode} checked={checked} innerRef={el => el && (el.indeterminate = indeterminate)} />
+                    <Input type={mode} checked={checked} innerRef={el => el && (el.indeterminate = indeterminate)} />
                 )
             };
 

@@ -4,13 +4,13 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { Comparator, dateFilter } from 'react-bootstrap-table2-filter'
 import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 import _ from 'lodash';
-import faker from 'faker/locale/en_US';
+import { faker } from '@faker-js/faker';
 import moment from 'moment';
 
 import {
     Badge,
     Button,
-    CustomInput,
+    Input,
     StarRating,
     ButtonGroup
 } from './../../../../components';
@@ -241,10 +241,10 @@ export class AdvancedTableA extends React.Component {
             onSelect: this.handleSelect.bind(this),
             onSelectAll: this.handleSelectAll.bind(this),
             selectionRenderer: ({ mode, checked, disabled }) => (
-                <CustomInput type={ mode } checked={ checked } disabled={ disabled } />
+                <Input type={ mode } checked={ checked } disabled={ disabled } />
             ),
             selectionHeaderRenderer: ({ mode, checked, indeterminate }) => (
-                <CustomInput type={ mode } checked={ checked } innerRef={el => el && (el.indeterminate = indeterminate)} />
+                <Input type={ mode } checked={ checked } innerRef={el => el && (el.indeterminate = indeterminate)} />
             )
         };
 

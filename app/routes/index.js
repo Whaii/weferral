@@ -1,9 +1,10 @@
 import React from 'react';
 import {
     Route,
-    Switch,
-    Redirect
+    Routes,
+    Navigate
 } from 'react-router';
+
 
 // ----------- Pages Imports ---------------
 import Dashboard from './Dashboards/Dashboard';
@@ -103,74 +104,74 @@ store.subscribe(()=>{
 export const RoutedContent = () => {
     return (
         <Provider store={store}>
-            <Switch>
-                <Redirect from="/" to="/dashboard" exact />
+              <Routes>
+                <Navigate from="/" to="/dashboard" exact />
 
-                <Route path="/dashboard" exact component={Dashboard} />
+                <Route path="/dashboard" exact element={Dashboard} />
 
                 { /*    Layouts     */}
-                <Route path='/layouts/navbar' component={NavbarOnly} />
-                <Route path='*user/profile' component={NavProfile} />
+                <Route path='/layouts/navbar' element={NavbarOnly} />
+                <Route path='*user/profile' element={NavProfile} />
 
 
                 { /*    Forms Routes    */}
-                <Route component={DatePicker} path="/forms/date-picker" />
-                <Route component={Dropzone} path="/assets" />
-                <Route component={CreateCampaign} path="/create-campaign" />
-                <Route component={CreateCampaign} path="/edit-campaign" />
-                <Route component={CampaignPageEditor} path="/edit-campaign-page" />
-                <Route component={Email} path="/notifications-templates" />
-                <Route component={CampaignField} path="/campaign" />
-                <Route component={NotificationTemplateForm} path="/edit-template/:id" />
-                <Route component={CampaignSettings} path="/campaign-settings/:id" />
-                <Route component={ManageParticipantList} path="/participants" />
-                <Route component={ManageCustomerList} path="/customers" />
-                <Route component={ParticipantDetails} path="/my-dashboard" />
-                <Route component={EditParticipant} path="/edit-participant/:id" />
-                <Route component={ParticipantDropzone} path="/profile/assets"/>
-                <Route component={Webhook} path="/webhook" />
-                <Route component={Logout} path="/logout" />
-                <Route component={ParticipantLogout} path="/:campaignName/logout"/>
-                <Route component={ManageRewardList} path="/payouts" />
-                <Route component={ParticipantPayout} path="/profile/payouts" />
-                <Route component={ParticipantCommision} path="/profile/commissions" />
-                <Route component={ManageCommissionList} path="/commissions" />
-                <Route component={File} path="/logo" />
-                <Route component={secretKey} path="/settings" />
+                <Route element={DatePicker} path="/forms/date-picker" />
+                <Route element={Dropzone} path="/assets" />
+                <Route element={CreateCampaign} path="/create-campaign" />
+                <Route element={CreateCampaign} path="/edit-campaign" />
+                <Route element={CampaignPageEditor} path="/edit-campaign-page" />
+                <Route element={Email} path="/notifications-templates" />
+                <Route element={CampaignField} path="/campaign" />
+                <Route element={NotificationTemplateForm} path="/edit-template/:id" />
+                <Route element={CampaignSettings} path="/campaign-settings/:id" />
+                <Route element={ManageParticipantList} path="/participants" />
+                <Route element={ManageCustomerList} path="/customers" />
+                <Route element={ParticipantDetails} path="/my-dashboard" />
+                <Route element={EditParticipant} path="/edit-participant/:id" />
+                <Route element={ParticipantDropzone} path="/profile/assets"/>
+                <Route element={Webhook} path="/webhook" />
+                <Route element={Logout} path="/logout" />
+                <Route element={ParticipantLogout} path="/:campaignName/logout"/>
+                <Route element={ManageRewardList} path="/payouts" />
+                <Route element={ParticipantPayout} path="/profile/payouts" />
+                <Route element={ParticipantCommision} path="/profile/commissions" />
+                <Route element={ManageCommissionList} path="/commissions" />
+                <Route element={File} path="/logo" />
+                <Route element={secretKey} path="/settings" />
 
 
 
                 { /*    Graphs Routes   */}
-                <Route component={ReCharts} path="/graphs/re-charts" />
+                <Route element={ReCharts} path="/graphs/re-charts" />
 
                 { /*    Tables Routes   */}
-                <Route component={Tables} path="/tables/tables" />
-                <Route component={ExtendedTable} path="/tables/extended-table" />
+                <Route element={Tables} path="/tables/tables" />
+                <Route element={ExtendedTable} path="/tables/extended-table" />
 
                 { /*    Pages Routes    */}
-                <Route component={ComingSoon} path="/pages/coming-soon" />
-                <Route component={Confirmation} path="/pages/confirmation" />
-                <Route component={Danger} path="/pages/danger" />
-                <Route component={Error404} path="/pages/error-404" />
-                <Route component={ForgotPassword} path="/pages/forgot-password" />
-                <Route component={LockScreen} path="/pages/lock-screen" />
-                <Route component={Login} path="/login" />
-                <Redirect from="/pub/:campaignName" to="/:campaignName/login" exact />
-                <Route component={ReferralLogin} path="/:campaignName/login" />
-                <Route component={Register} path="/pages/register" />
-                <Route component={setupAdmin} path="/setup" />
-                <Route component={referralSignup} path="/:campaignName/signup" />
-                <Route name="Finish Your Registration" path="/:campaignName/invitation/:token" component={referralSignup}/>
-                <Route component={ReferralReset} path="/:campaignName/forgot-password" />
-                <Route component={ReferralNewPassword} path="reset-password/:pid/:token" />
-                <Route component={Success} path="/pages/success" />
-                <Route component={Timeline} path="/pages/timeline" />
+                <Route element={ComingSoon} path="/pages/coming-soon" />
+                <Route element={Confirmation} path="/pages/confirmation" />
+                <Route element={Danger} path="/pages/danger" />
+                <Route element={Error404} path="/pages/error-404" />
+                <Route element={ForgotPassword} path="/pages/forgot-password" />
+                <Route element={LockScreen} path="/pages/lock-screen" />
+                <Route element={Login} path="/login" />
+                <Navigate from="/pub/:campaignName" to="/:campaignName/login" exact />
+                <Route element={ReferralLogin} path="/:campaignName/login" />
+                <Route element={Register} path="/pages/register" />
+                <Route element={setupAdmin} path="/setup" />
+                <Route element={referralSignup} path="/:campaignName/signup" />
+                <Route name="Finish Your Registration" path="/:campaignName/invitation/:token" element={referralSignup}/>
+                <Route element={ReferralReset} path="/:campaignName/forgot-password" />
+                <Route element={ReferralNewPassword} path="reset-password/:pid/:token" />
+                <Route element={Success} path="/pages/success" />
+                <Route element={Timeline} path="/pages/timeline" />
 
-                <Route path='/icons' exact component={Icons} />
+                <Route path='/icons' exact element={Icons} />
 
                 { /*    404    */}
-                <Redirect to="/pages/error-404" />
-            </Switch>
+                <Navigate to="/pages/error-404" />
+            </Routes>    
         </Provider>
         
     );
@@ -181,16 +182,16 @@ export const RoutedNavbars  = () => (
     <Switch>
         { /* Other Navbars: */}
         <Route
-            component={ SidebarANavbar }
+            element={ SidebarANavbar }
             path="/layouts/sidebar-a"
         />
         <Route
-            component={ NavbarOnly.Navbar }
+            element={ NavbarOnly.Navbar }
             path="/layouts/navbar"
         />
         { /* Default Navbar: */}
         <Route
-            component={ DefaultNavbar }
+            element={ DefaultNavbar }
         />
     </Switch>  
 );
@@ -199,12 +200,12 @@ export const RoutedSidebars = () => (
     <Switch>
         { /* Other Sidebars: */}
         <Route
-            component={ SidebarASidebar }
+            element={ SidebarASidebar }
             path="/layouts/sidebar-a"
         />
         { /* Default Sidebar: */}
         <Route
-            component={ DefaultSidebar }
+            element={ DefaultSidebar }
         />
     </Switch>
 );

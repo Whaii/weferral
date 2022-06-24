@@ -6,7 +6,6 @@ import {
     HolderProvider,
     CardImg,
     Input,
-    CustomInput,
     UncontrolledModal,
     ModalHeader,
     ModalBody,
@@ -179,7 +178,7 @@ class ImageUploader extends React.Component {
                                 }}/>
                                 <br></br>
                             { this.state.loadingImage && <Load /> }
-                            <CustomInput type="file" name={this.props.name || 'file'} id={this.state.elementID} onChange={this.onImageSelected} label="Browse for a file to upload...." />
+                            <Input type="file" name={this.props.name || 'file'} id={this.state.elementID} onChange={this.onImageSelected} label="Browse for a file to upload...." />
                             {/*<input id={this.state.elementID} type="file" onChange={this.onImageSelected} name={this.props.name || 'file'}/>*/}
                         </div>
                         {(this.state.success && this.state.reloadNotice) &&
