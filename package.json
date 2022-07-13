@@ -68,7 +68,7 @@
     "js-file-download": "^0.4.12",
     "lodash": "^4.17.11",
     "moment": "^2.29.1",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.2.8",
     "numeral": "^2.0.6",
     "prop-types": "^15.7.2",
     "query-string": "^6.7.0",
