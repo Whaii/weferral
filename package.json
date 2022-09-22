@@ -98,7 +98,7 @@
     "react-redux": "^8.0.2",
     "react-responsive": "^8.2.0",
     "react-router": "^6.3.0",
-    "react-router-dom": "^5.0.1",
+    "react-router-dom": "^6.4.1",
     "react-s-alert": "^1.4.1",
     "react-share": "^4.3.1",
     "react-text-mask": "^5.4.3",
